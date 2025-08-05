@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createBlog,deleteBlog,createTestimonial,deleteTestimonial,createService,deleteService,createOffer,deleteOffer,createCollaboration,deleteCollaboration,createPricing,deletePricing
+const { createBlog,deleteBlog,createTestimonial,deleteTestimonial,createService,deleteService,createOffer,deleteOffer,createCollaboration,deleteCollaboration,createPricing,deletePricing,getAllContactForms
 } = require("../controllers/adminController");
 
 const isAuthenticatedAdmin = require("../middleware/isAuthenticatedAdmin");
@@ -26,5 +26,8 @@ router.delete("/collaboration/:id", isAuthenticatedAdmin, deleteCollaboration);
 
 router.post("/pricing", isAuthenticatedAdmin, createPricing);
 router.delete("/pricing/:id", isAuthenticatedAdmin, deletePricing);
+
+router.get("/contact-forms", isAuthenticatedAdmin, getAllContactForms);
+
 
 module.exports = router;

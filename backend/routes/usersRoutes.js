@@ -16,3 +16,4 @@ router.post('/getAllTestimonials', isUserAuthenticated, getAllTestimonials);
 
 router.post('/getAllServices', isUserAuthenticated, getAllServices);
 
+module.exports = router;

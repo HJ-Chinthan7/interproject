@@ -5,7 +5,7 @@ const validateSignUp = async(req, res, next) => {
     return res.status(400).json({ error: 'First name, email, password,lastName, gender and role are required' });
   }
 
-  
+  console.log("here");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).json({ error: 'Invalid email format' });

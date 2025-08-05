@@ -3,9 +3,9 @@ const Testimonial = require('../models/Testimonial');
 const Service = require('../models/Service');
 const Collaboration = require('../models/Collaboration');
 const Offer = require('../models/Offer');
-const PricingPlan = require('../models/PricingPlan');
+const Pricing = require('../models/Pricing');
 
-// Get all published blogs
+
 const getAllBlogs = async (req, res) => {
     try {
         const blogs = await Blog.find({ isPublished: true })
@@ -27,7 +27,7 @@ const getAllBlogs = async (req, res) => {
     }
 };
 
-// Get all published testimonials
+
 const getAllTestimonials = async (req, res) => {
     try {
         const testimonials = await Testimonial.find({ isPublished: true })
@@ -48,7 +48,7 @@ const getAllTestimonials = async (req, res) => {
     }
 };
 
-// Get all active services
+
 const getAllServices = async (req, res) => {
     try {
         const services = await Service.find({ isActive: true })
@@ -69,7 +69,7 @@ const getAllServices = async (req, res) => {
     }
 };
 
-// Get all active offers
+
 const getAllOffers = async (req, res) => {
     try {
         const offers = await Offer.find({ 
@@ -93,7 +93,7 @@ const getAllOffers = async (req, res) => {
     }
 };
 
-// Get all active collaborations
+
 const getAllCollaborations = async (req, res) => {
     try {
         const collaborations = await Collaboration.find({ isActive: true })
@@ -114,17 +114,17 @@ const getAllCollaborations = async (req, res) => {
     }
 };
 
-// Get all active pricing plans
+
 const getAllPricingPlans = async (req, res) => {
     try {
-        const pricingPlans = await PricingPlan.find({ isActive: true })
+        const pricing = await PricingPlan.find({ isActive: true })
             .sort({ order: 1 })
             .select('-__v');
         
         res.status(200).json({
             success: true,
-            count: pricingPlans.length,
-            data: pricingPlans
+            count: pricing.length,
+            data: pricing
         });
     } catch (error) {
         res.status(500).json({

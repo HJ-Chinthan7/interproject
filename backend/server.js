@@ -14,7 +14,7 @@ const userRoutes= require('./routes/usersRoutes');
 const adminRoutes= require('./routes/adminRoutes');
 app.use('/api/auth',authRoutes);
 app.use('/api/users',userRoutes);  
-app.use('/api/admin',adminRoutes );
+app.use('/api/admin',adminRoutes);
 
 
 connectDB().then(()=>{

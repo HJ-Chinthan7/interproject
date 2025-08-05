@@ -17,4 +17,4 @@ const collabarationSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Collaboration", collaborationSchema);
+module.exports = mongoose.model("Collaboration", collabarationSchema);

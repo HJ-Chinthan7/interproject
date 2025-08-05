@@ -10,16 +10,9 @@ const contactSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    lowercase: true,
-    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email']
+    lowercase: true
   },
   message: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: [10, 'Message must be at least 10 characters']
-  },
-  captcha: {
     type: String,
     required: true,
     trim: true

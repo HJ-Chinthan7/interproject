@@ -4,11 +4,12 @@ const Service = require('../models/Service');
 const Offer = require('../models/Offer');
 const Collaboration = require('../models/Collaboration');
 const Pricing = require('../models/Pricing');
+const ContactForm = require('../models/ContactForm');
 
 
 const createBlog = async (req, res) => {
     try {
-        const { title, content, excerpt, imageUrl, tags, category, status } = req.body;
+        const { title, content, tags, status } = req.body;
 
         if (!title || !content) {
             return res.status(400).json({
@@ -20,12 +21,10 @@ const createBlog = async (req, res) => {
         const newBlog = new Blog({
             title,
             content,
-            excerpt: excerpt || content.substring(0, 200) + '...',
-            imageUrl: imageUrl || '',
+            author: req.user._id,
             tags: tags || [],
-            category: category || 'general',
-            status: status || 'published',
-            author: req.user._id
+            status: status || 'draft',
+            publishedAt: status === 'published' ? new Date() : null
         });
 
         await newBlog.save();
@@ -74,22 +73,20 @@ const deleteBlog = async (req, res) => {
 
 const createTestimonial = async (req, res) => {
     try {
-        const { clientName, clientTitle, content, rating, imageUrl } = req.body;
+        const { name, message, designation, image } = req.body;
 
-        if (!clientName || !content || !rating) {
+        if (!name || !message || !designation) {
             return res.status(400).json({
                 success: false,
-                message: 'Client name, content, and rating are required'
+                message: 'Name, message, and designation are required'
             });
         }
 
         const newTestimonial = new Testimonial({
-            clientName,
-            clientTitle: clientTitle || '',
-            content,
-            rating: Math.min(Math.max(rating, 1), 5),
-            imageUrl: imageUrl || '',
-            isActive: true
+            name,
+            message,
+            designation,
+            image: image || ''
         });
 
         await newTestimonial.save();
@@ -136,7 +133,7 @@ const deleteTestimonial = async (req, res) => {
 
 const createService = async (req, res) => {
     try {
-        const { title, description, features, price, duration, imageUrl, category } = req.body;
+        const { title, description, icon } = req.body;
 
         if (!title || !description) {
             return res.status(400).json({
@@ -148,12 +145,7 @@ const createService = async (req, res) => {
         const newService = new Service({
             title,
             description,
-            features: features || [],
-            price: price || 0,
-            duration: duration || '',
-            imageUrl: imageUrl || '',
-            category: category || 'general',
-            isActive: true
+            icon: icon || ''
         });
 
         await newService.save();
@@ -200,24 +192,19 @@ const deleteService = async (req, res) => {
 
 const createOffer = async (req, res) => {
     try {
-        const { title, description, discount, originalPrice, discountedPrice, validUntil, imageUrl } = req.body;
+        const { title, description, validTill } = req.body;
 
-        if (!title || !description || !discount) {
+        if (!title || !description || !validTill) {
             return res.status(400).json({
                 success: false,
-                message: 'Title, description, and discount are required'
+                message: 'Title, description, and validTill are required'
             });
         }
 
         const newOffer = new Offer({
             title,
-            description,
-            discount,
-            originalPrice: originalPrice || 0,
-            discountedPrice: discountedPrice || 0,
-            validUntil: validUntil || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
-            imageUrl: imageUrl || '',
-            isActive: true
+            description,    
+            validTill
         });
 
         await newOffer.save();
@@ -266,22 +253,20 @@ const deleteOffer = async (req, res) => {
 
 const createCollaboration = async (req, res) => {
     try {
-        const { title, description, partnerName, partnerLogo, websiteUrl, status } = req.body;
+        const { partnerName, description, logo, link } = req.body;
 
-        if (!title || !description || !partnerName) {
+        if (!partnerName || !description) {
             return res.status(400).json({
                 success: false,
-                message: 'Title, description, and partner name are required'
+                message: 'Partner name and description are required'
             });
         }
 
         const newCollaboration = new Collaboration({
-            title,
-            description,
             partnerName,
-            partnerLogo: partnerLogo || '',
-            websiteUrl: websiteUrl || '',
-            status: status || 'active'
+            description,
+            logo: logo || '',
+            link: link || ''
         });
 
         await newCollaboration.save();
@@ -329,7 +314,7 @@ const deleteCollaboration = async (req, res) => {
 
 const createPricing = async (req, res) => {
     try {
-        const { planName, price, features, duration, description, isPopular } = req.body;
+        const { planName, price, features } = req.body;
 
         if (!planName || !price || !features) {
             return res.status(400).json({
@@ -341,10 +326,7 @@ const createPricing = async (req, res) => {
         const newPricing = new Pricing({
             planName,
             price,
-            features,
-            duration: duration || 'monthly',
-            description: description || '',
-            isPopular: isPopular || false
+            features
         });
 
         await newPricing.save();
@@ -390,6 +372,25 @@ const deletePricing = async (req, res) => {
     }
 };
 
+// Contact Form Management
+const getAllContactForms = async (req, res) => {
+    try {
+        const contactForms = await ContactForm.find().sort({ createdAt: -1 });
+        
+        res.status(200).json({
+            success: true,
+            message: 'Contact forms retrieved successfully',
+            data: contactForms
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error retrieving contact forms',
+            error: error.message
+        });
+    }
+};
+
 
 module.exports = {
     createBlog,
@@ -408,5 +409,7 @@ module.exports = {
     deleteCollaboration,
     
     createPricing,
-    deletePricing
+    deletePricing,
+    
+    getAllContactForms
 };
