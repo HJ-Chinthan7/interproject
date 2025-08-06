@@ -24,9 +24,6 @@ const blogSchema = new mongoose.Schema({
     type: String,
     enum: ['draft', 'published', 'archived'],
     default: 'draft'
-  },
-  publishedAt: {
-    type: Date
   }
 }, { timestamps: true });
 

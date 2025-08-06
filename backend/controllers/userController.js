@@ -4,11 +4,12 @@ const Service = require('../models/Service');
 const Collaboration = require('../models/Collaboration');
 const Offer = require('../models/Offer');
 const Pricing = require('../models/Pricing');
+const Contact = require('../models/ContactForm');
 
 
 const getAllBlogs = async (req, res) => {
     try {
-        const blogs = await Blog.find({ isPublished: true })
+        const blogs = await Blog.find({ status: 'published' })
             .populate('author', 'name email')
             .sort({ createdAt: -1 })
             .select('-__v');
@@ -30,7 +31,7 @@ const getAllBlogs = async (req, res) => {
 
 const getAllTestimonials = async (req, res) => {
     try {
-        const testimonials = await Testimonial.find({ isPublished: true })
+        const testimonials = await Testimonial.find({ })
             .sort({ createdAt: -1 })
             .select('-__v');
         
@@ -51,7 +52,7 @@ const getAllTestimonials = async (req, res) => {
 
 const getAllServices = async (req, res) => {
     try {
-        const services = await Service.find({ isActive: true })
+        const services = await Service.find({  })
             .sort({ order: 1 })
             .select('-__v');
         
@@ -73,8 +74,7 @@ const getAllServices = async (req, res) => {
 const getAllOffers = async (req, res) => {
     try {
         const offers = await Offer.find({ 
-            isActive: true, 
-            validUntil: { $gte: new Date() } 
+            validTill: { $gte: new Date() } 
         })
             .sort({ createdAt: -1 })
             .select('-__v');
@@ -96,7 +96,7 @@ const getAllOffers = async (req, res) => {
 
 const getAllCollaborations = async (req, res) => {
     try {
-        const collaborations = await Collaboration.find({ isActive: true })
+        const collaborations = await Collaboration.find({ })
             .sort({ createdAt: -1 })
             .select('-__v');
         
@@ -117,7 +117,7 @@ const getAllCollaborations = async (req, res) => {
 
 const getAllPricingPlans = async (req, res) => {
     try {
-        const pricing = await PricingPlan.find({ isActive: true })
+        const pricing = await Pricing.find({ })
             .sort({ order: 1 })
             .select('-__v');
         
@@ -135,11 +135,63 @@ const getAllPricingPlans = async (req, res) => {
     }
 };
 
+const submitContactForm = async (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+
+      
+        if (!name || !email || !message) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide all required fields: name, email, and message'
+            });
+        }
+
+       
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide a valid email address'
+            });
+        }
+
+       
+        const newContact = new Contact({
+            name: name.trim(),
+            email: email.trim().toLowerCase(),
+            message: message.trim()
+        });
+
+        await newContact.save();
+
+        res.status(201).json({
+            success: true,
+            message: 'Contact form submitted successfully',
+            data: {
+                id: newContact._id,
+                name: newContact.name,
+                email: newContact.email,
+                message: newContact.message,
+                createdAt: newContact.createdAt
+            }
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error submitting contact form',
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     getAllBlogs,
     getAllTestimonials,
     getAllServices,
     getAllOffers,
     getAllCollaborations,
-    getAllPricingPlans
+    getAllPricingPlans,
+    submitContactForm
 };

@@ -47,6 +47,7 @@ const signin=async(req,res)=>{
       return res.status(400).json({ error: 'Invalid email or password' });
     }
     const authToken=token(user);
+    console.log("here");
     res.cookie('authToken',authToken, {
       secure: process.env.NODE_ENV === 'production',
        httpOnly: true,

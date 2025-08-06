@@ -9,7 +9,7 @@ const ContactForm = require('../models/ContactForm');
 
 const createBlog = async (req, res) => {
     try {
-        const { title, content, tags, status } = req.body;
+        const { title, content, tags, status,author } = req.body;
 
         if (!title || !content) {
             return res.status(400).json({
@@ -21,10 +21,9 @@ const createBlog = async (req, res) => {
         const newBlog = new Blog({
             title,
             content,
-            author: req.user._id,
+            author: author || req.user._id,
             tags: tags || [],
             status: status || 'draft',
-            publishedAt: status === 'published' ? new Date() : null
         });
 
         await newBlog.save();
@@ -372,7 +371,7 @@ const deletePricing = async (req, res) => {
     }
 };
 
-// Contact Form Management
+
 const getAllContactForms = async (req, res) => {
     try {
         const contactForms = await ContactForm.find().sort({ createdAt: -1 });
