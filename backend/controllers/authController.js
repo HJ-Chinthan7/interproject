@@ -4,11 +4,11 @@ const token=require('../utils/token');
 
 const signup=async(req,res)=>{
   try{
-const { firstName, lastName, email, password,gender, role } = req.body;
+const { firstName, lastName, email, password,gender } = req.body;
 const existingUser = await User.findOne({ email });
 if (existingUser) {res.status(400).json({ error: 'User already exists' });}
 const hashedPassword = await bcrypt.hash(password,10);
-const user = new User({firstName, lastName, email, password:hashedPassword,role,gender});
+const user = new User({firstName, lastName, email, password:hashedPassword,gender});
 await user.save();
 const authToken = token(user);
 res.cookie('authToken', authToken, {

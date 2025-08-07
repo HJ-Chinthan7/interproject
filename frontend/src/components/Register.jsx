@@ -1,19 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import authService from '../services/authService';
+import { useAuth } from '../context/AuthContext';
+import '../styles/Register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    gender: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { login } = useContext(AuthContext);
+  const { register, userRole } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -28,18 +30,26 @@ const Register = () => {
     setLoading(true);
     setError('');
 
+    // Password validation
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       setLoading(false);
       return;
     }
-
+    console.log(formData);
+const { firstName, lastName, email, gender,password} = formData;
     try {
-      const response = await authService.register(formData);
-      login(response.data);
-      navigate('/');
+      const response = await register({firstName, lastName, email,gender, password});
+      
+     if(response.success){
+       if (userRole === 'admin') {
+        navigate('/admindashboard');
+      } else {
+        navigate('/home');
+      }
+     }
     } catch (error) {
-      setError(error.response?.data?.message || 'Registration failed');
+      setError(error.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
@@ -53,16 +63,39 @@ const Register = () => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Name</label>
+            <label>First Name</label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="firstName"
+              value={formData.firstName}
               onChange={handleChange}
               required
             />
           </div>
-          
+          <div className="form-group">
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Gender</label>
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
           <div className="form-group">
             <label>Email</label>
             <input

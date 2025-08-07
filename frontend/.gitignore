@@ -35,3 +35,8 @@ dist-ssr
 /vitest.config.ts
 /eslint.config.js
 /vite.config.js
+/frontend/components/BlogList.jsx
+/frontend/components/BlogCard.jsx
+/frontend/styles/Blog.css
+/frontend/pages/Blog.jsx
+/frontend/services/blogService.js

@@ -12,6 +12,7 @@ app.use(express.json());
 const authRoutes= require('./routes/authRoutes')
 const userRoutes= require('./routes/usersRoutes');
 const adminRoutes= require('./routes/adminRoutes');
+console.log("reg is running");
 app.use('/api/auth',authRoutes);
 app.use('/api/users',userRoutes);  
 app.use('/api/admin',adminRoutes);

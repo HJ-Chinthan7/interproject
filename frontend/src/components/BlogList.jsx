@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BlogCard from './BlogCard';
-import blogService from '../../services/blogService';
+import blogService from '../services/blogService';
+import '../styles/Blog.css';
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);

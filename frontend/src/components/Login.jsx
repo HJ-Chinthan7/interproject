@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import authService from '../services/authService';
+import { useAuth } from '../context/AuthContext';
+import '../styles/Login.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,27 +11,37 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { login } = useContext(AuthContext);
+  const { login, userRole } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
+    setLoading(true);
 
     try {
-      const response = await authService.login(formData);
-      login(response.data);
-      navigate('/');
-    } catch (error) {
-      setError(error.response?.data?.message || 'Login failed');
+      const result = await login(formData.email, formData.password);
+      
+      if (result.success) {
+        if (userRole === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/home');
+        }
+      } else {
+        setError(result.error || 'Login failed. Please try again.');
+      }
+    } catch (err) {
+      setError(err.message || 'An error occurred during login.');
     } finally {
       setLoading(false);
     }
@@ -39,41 +49,57 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-form">
-        <h2>Sign In</h2>
-        {error && <div className="error-message">{error}</div>}
+      <div className="login-card">
+        <div className="login-header">
+          <h1>Welcome Back</h1>
+          <p>Sign in to your account</p>
+        </div>
         
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label>Email</label>
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
+              id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder="Enter your email"
+              className={`form-input ${error ? 'error' : ''}`}
               required
             />
           </div>
           
           <div className="form-group">
-            <label>Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
+              id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
+              placeholder="Enter your password"
+              className={`form-input ${error ? 'error' : ''}`}
               required
             />
           </div>
           
-          <button type="submit" disabled={loading}>
+          {error && <div className="error-message">{error}</div>}
+          
+          <button 
+            type="submit" 
+            className="login-button"
+            disabled={loading}
+          >
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
         
-        <p>
-          Don't have an account? <Link to="/register">Register here</Link>
-        </p>
+        <div className="login-footer">
+          <p>
+            Don't have an account? <Link to="/register">Sign up here</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

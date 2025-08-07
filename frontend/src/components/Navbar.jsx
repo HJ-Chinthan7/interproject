@@ -1,66 +1,84 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
-  const { user, logout, isAdmin } = useContext(AuthContext);
+  const { user, logout, userRole } = useAuth();
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/');
+    setIsMenuOpen(false);
   };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };                                            
+
+  // Navigation items for logged-in users
+  const loggedInNavItems = [
+    { path: '/', label: 'Home' },
+    { path: '/blogs', label: 'Blogs' },
+    { path: '/pricing', label: 'Pricing' },
+    { path: '/collaborations', label: 'Collaborations' },
+    { path: '/about', label: 'About' },
+    { path: '/contact', label: 'Contact' },
+    { path: '/offers', label: 'Offers' },
+    { path: '/outreach', label: 'Outreach' },
+    { path: '/services', label: 'Services' },
+  ];
+
+  // Navigation items for non-logged-in users
+  const publicNavItems = [
+    { path: '/', label: 'Home' },
+    { path: '/login', label: 'SignIn' },
+    { path: '/register', label: 'SignUp' },
+  ];
+
+  const navItems = user ? loggedInNavItems : publicNavItems;
 
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo">
+        <Link to="/" className="nav-logo" onClick={closeMenu}>
           YourBrand
         </Link>
         
-        <ul className="nav-menu">
-          <li className="nav-item">
-            <Link to="/" className="nav-link">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/about" className="nav-link">About</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/services" className="nav-link">Services</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/blogs" className="nav-link">Blogs</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/collaborations" className="nav-link">Collaborations</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/testimonials" className="nav-link">Testimonials</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/outreach" className="nav-link">Outreach</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/offers" className="nav-link">Offers</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/pricing" className="nav-link">Pricing</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/contact" className="nav-link">Contact</Link>
-          </li>
+        {/* Hamburger menu for mobile */}
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+
+        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+          {navItems.map((item) => (
+            <li key={item.path} className="nav-item">
+              <Link to={item.path} className="nav-link auth-link" onClick={closeMenu}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
           
-          {isAdmin && (
+          {user && userRole === 'admin' && (
             <li className="nav-item">
-              <Link to="/admin" className="nav-link">Admin</Link>
+              <Link to="/admin" className="nav-link admin-link" onClick={closeMenu}>
+                Admin Dashboard
+              </Link>
             </li>
           )}
           
-          {user ? (
+          {user && (
             <>
               <li className="nav-item">
-                <span className="nav-link">Welcome, {user.name}</span>
+                <span className="nav-link welcome-text">Welcome, {user.firstName || user.name}</span>
               </li>
               <li className="nav-item">
                 <button onClick={handleLogout} className="nav-link logout-btn">
@@ -68,16 +86,8 @@ const Navbar = () => {
                 </button>
               </li>
             </>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link to="/login" className="nav-link">Sign In</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/register" className="nav-link">Register</Link>
-              </li>
-            </>
-          )}
+          ) 
+          }
         </ul>
       </div>
     </nav>

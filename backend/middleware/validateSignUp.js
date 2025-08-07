@@ -1,7 +1,9 @@
 
 const validateSignUp = async(req, res, next) => {
-  const { firstName, lastName, email, password, gender, role } = req.body;
-  if (!firstName || !email || !password || !gender || !role||!lastName) {
+  console.log("in validateSignUp middleware");
+  console.log(req.body);
+  const { firstName, lastName, email, password, gender } = req.body;
+  if (!firstName || !email || !password || !gender ||!lastName) {
     return res.status(400).json({ error: 'First name, email, password,lastName, gender and role are required' });
   }
 
@@ -13,10 +15,6 @@ const validateSignUp = async(req, res, next) => {
 
   if (password.length < 6) {
     return res.status(400).json({ error: 'Password must be at least 6 characters long' });
-  }
-
-  if (!['user', 'admin'].includes(role)) {
-    return res.status(400).json({ error: 'Role must be either user or admin' });
   }
 
   if (!['male', 'female', 'other'].includes(gender)) {
