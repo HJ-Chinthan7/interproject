@@ -6,11 +6,41 @@ const Offer = require('../models/Offer');
 const Pricing = require('../models/Pricing');
 const Contact = require('../models/ContactForm');
 
+const deleteBlog = async (req, res) => {
+    console.log("deleteBlog function called");
+    try {
+    
 
+        const { id } = req.params;
+          const blogExists = await Blog.findById({_id:id});
+        if (!blogExists) {
+            return res.status(404).json({
+                success: false,
+                message: 'Blog post not found'
+            });
+        }
+
+        const blog = await Blog.findByIdAndDelete({_id:id});
+        
+        console.log("Blog deleted:", blog);
+
+     
+        res.status(200).json({
+            success: true,
+            message: 'Blog post deleted successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting blog post',
+            error: error.message
+        });
+    }
+};
 const getAllBlogs = async (req, res) => {
     try {
         const blogs = await Blog.find({ status: 'published' })
-            .populate('author', 'name email')
+            .populate('author', 'firstName email')
             .sort({ createdAt: -1 })
             .select('-__v');
         
@@ -28,7 +58,28 @@ const getAllBlogs = async (req, res) => {
     }
 };
 
-
+const getBlogById= async (req, res) => {
+    try {
+        
+        const {id}=req.params;
+        const blogs = await Blog.findById({ _id:id })
+            .populate('author', 'firstName email')
+            .sort({ createdAt: -1 })
+            .select('-__v');
+        
+        res.status(200).json({
+            success: true,
+            count: blogs.length,
+            data: blogs
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error fetching blogs',
+            error: error.message
+        });
+    }
+};
 const getAllTestimonials = async (req, res) => {
     try {
         const testimonials = await Testimonial.find({ })
@@ -193,5 +244,7 @@ module.exports = {
     getAllOffers,
     getAllCollaborations,
     getAllPricingPlans,
-    submitContactForm
+    submitContactForm,
+    deleteBlog,
+    getBlogById
 };

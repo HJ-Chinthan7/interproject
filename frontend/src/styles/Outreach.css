@@ -1,0 +1,202 @@
+/* Outreach Page Styles */
+.outreach-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.outreach-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.outreach-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.outreach-header p {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.outreach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Outreach Card Styles */
+.outreach-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.outreach-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.outreach-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.outreach-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.outreach-card:hover .outreach-image img {
+  transform: scale(1.05);
+}
+
+.outreach-content {
+  padding: 1.5rem;
+}
+
+.outreach-content h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.outreach-content p {
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.outreach-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+.outreach-date,
+.outreach-location {
+  display: flex;
+  align-items: center;
+}
+
+.outreach-date::before {
+  content: '📅';
+  margin-right: 0.5rem;
+}
+
+.outreach-location::before {
+  content: '📍';
+  margin-right: 0.5rem;
+}
+
+.outreach-type {
+  margin-top: 1rem;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #3498db;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Loading and Error States */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.error-message {
+  text-align: center;
+  color: #e74c3c;
+  font-size: 1.1rem;
+  margin: 2rem 0;
+}
+
+/* Admin Delete Button Styles */
+.outreach-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.outreach-card-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+  flex: 1;
+}
+
+.delete-btn {
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  margin-left: 0.5rem;
+}
+
+.delete-btn:hover {
+  background: #cc0000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .outreach-container {
+    padding: 1rem;
+  }
+  
+  .outreach-header h1 {
+    font-size: 2rem;
+  }
+  
+  .outreach-header p {
+    font-size: 1rem;
+  }
+  
+  .outreach-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .outreach-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .outreach-card {
+    margin: 0 0.5rem;
+  }
+}

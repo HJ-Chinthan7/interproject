@@ -1,0 +1,64 @@
+/* Offers list/grid layout styles */
+.offers-list {
+  width: 100%;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Responsive grid layout */
+@media (max-width: 1200px) {
+  .offers-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .offers-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .offers-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+/* Loading and empty states */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.no-offers {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.no-offers p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Grid container spacing */
+.offers-container .offers-list {
+  margin-top: 2rem;
+}
+
+/* Ensure cards have consistent height in grid */
+.offers-grid .offer-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

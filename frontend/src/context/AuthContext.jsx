@@ -15,38 +15,20 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const[userRole,setUserRole]=useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    checkAuthStatus();
+    setLoading(false);
   }, []);
-
-  const checkAuthStatus = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const userData = await authService.getCurrentUser();
-        setUser(userData);
-        setIsAuthenticated(true);
-        setUserRole(userData.role);
-      }
-    } catch (error) {
-      console.error('Auth check failed:', error);
-      localStorage.removeItem('token');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const login = async (email, password) => {
     try {
       const response = await authService.login(email, password);
-      const { token, user } = response;
-      
-      localStorage.setItem('token', token);
+      const { user } = response;
+      console.log("in auth context login", user);
       setUser(user);
       setIsAuthenticated(true);
-      setUserRole(user.role)
+      setUserRole(user.role);
       
       return { success: true };
     } catch (error) {
@@ -58,9 +40,8 @@ export const AuthProvider = ({ children }) => {
     console.log("in auth context register", userData);
     try {
       const response = await authService.register(userData);
-      const { token, user } = response;
+      const { user } = response;
       
-      localStorage.setItem('token', token);
       setUser(user);
       setIsAuthenticated(true);
       setUserRole(user.role);
@@ -71,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    authService.logout();
     setUser(null);
     setIsAuthenticated(false);
     setUserRole(null);
@@ -94,6 +75,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
 
 export default AuthContext;

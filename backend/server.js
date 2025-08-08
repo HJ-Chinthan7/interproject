@@ -5,18 +5,27 @@ const cors=require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
 const app=express();
+const cookieParser = require('cookie-parser');
 
 
-app.use(cors());
+const corsOptions = {
+    origin: ['http://localhost:5173'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 const authRoutes= require('./routes/authRoutes')
 const userRoutes= require('./routes/usersRoutes');
 const adminRoutes= require('./routes/adminRoutes');
-console.log("reg is running");
+
 app.use('/api/auth',authRoutes);
+console.log("role");
 app.use('/api/users',userRoutes);  
 app.use('/api/admin',adminRoutes);
-
 
 connectDB().then(()=>{
     console.log('Connected to MongoDB');

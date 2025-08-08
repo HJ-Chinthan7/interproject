@@ -17,7 +17,8 @@ import Pricing from './pages/Pricing';
 import AdminDashboard from './admin/AdminDashboard';
 import './App.css';
 import LandingPage from './pages/LandingPage';
-
+import Display from './components/Display';
+import AddBlogForm from './components/AddBlogForm';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -134,6 +135,22 @@ function App() {
                 <ProtectedRoute>
                   <Pricing />
                 </ProtectedRoute>
+              } 
+            />
+             <Route 
+              path="/display/:id" 
+              element={
+                <ProtectedRoute>
+                  <Display />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/createBlog" 
+              element={
+                <AdminRoute>
+                  <AddBlogForm />
+                </AdminRoute>
               } 
             />
               <Route 

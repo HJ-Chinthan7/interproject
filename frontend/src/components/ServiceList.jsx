@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
-import serviceService from '../../services/serviceService';
+import serviceService from '../services/serviceService';
+import '../styles/ServiceList.css';
 
 const ServiceList = () => {
   const [services, setServices] = useState([]);
@@ -23,17 +24,32 @@ const ServiceList = () => {
     }
   };
 
+  const handleDelete = (id) => {
+    setServices(prev => prev.filter(service => service._id !== id));
+  };
+
   if (loading) return <div className="loading">Loading services...</div>;
   if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className="service-list">
-      <h2>Our Services</h2>
-      <div className="services-grid">
-        {services.map(service => (
-          <ServiceCard key={service._id} service={service} />
-        ))}
-      </div>
+    <div className="service-list-container">
+      <h2 className="service-list-title">Our Services</h2>
+      
+      {services.length === 0 ? (
+        <div className="empty-state">
+          <p>No services available at the moment.</p>
+        </div>
+      ) : (
+        <div className="services-grid">
+          {services.map(service => (
+            <ServiceCard 
+              key={service._id} 
+              service={service} 
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

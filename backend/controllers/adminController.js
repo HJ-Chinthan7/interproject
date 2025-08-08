@@ -43,31 +43,7 @@ const createBlog = async (req, res) => {
 };
 
 
-const deleteBlog = async (req, res) => {
-    try {
-        const { id } = req.params;
 
-        const blog = await Blog.findByIdAndDelete(id);
-
-        if (!blog) {
-            return res.status(404).json({
-                success: false,
-                message: 'Blog post not found'
-            });
-        }
-
-        res.status(200).json({
-            success: true,
-            message: 'Blog post deleted successfully'
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Error deleting blog post',
-            error: error.message
-        });
-    }
-};
 
 
 const createTestimonial = async (req, res) => {
@@ -222,11 +198,10 @@ const createOffer = async (req, res) => {
     }
 };
 
-// Delete an offer
 const deleteOffer = async (req, res) => {
     try {
         const { id } = req.params;
-
+console.log("in  delete offer")
         const offer = await Offer.findByIdAndDelete(id);
 
         if (!offer) {
@@ -348,7 +323,7 @@ const createPricing = async (req, res) => {
 const deletePricing = async (req, res) => {
     try {
         const { id } = req.params;
-
+console.log(id);
         const pricing = await Pricing.findByIdAndDelete(id);
 
         if (!pricing) {
@@ -393,7 +368,6 @@ const getAllContactForms = async (req, res) => {
 
 module.exports = {
     createBlog,
-    deleteBlog,
     
     createTestimonial,
     deleteTestimonial,

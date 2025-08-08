@@ -29,7 +29,7 @@
 }
 
 .nav-logo:hover {
-  color: #1d4ed8;
+  color: #1f45af;
 }
 
 .nav-menu {
@@ -62,17 +62,17 @@
 }
 
 .nav-link:hover {
-  color: #2563eb;
+  color: #0a0e17;
   background-color: #f3f4f6;
 }
 
 .nav-link.active {
-  color: #2563eb;
+  color: #292c32;
   background-color: #eff6ff;
 }
 
 .auth-link {
-  background-color: #2563eb;
+  background-color: #25eb5d;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
@@ -80,7 +80,7 @@
 }
 
 .auth-link:hover {
-  background-color: #1d4ed8;
+  background-color: #1dd8ac;
   color: white;
 }
 

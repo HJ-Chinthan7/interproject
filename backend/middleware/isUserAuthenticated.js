@@ -3,9 +3,8 @@ const User = require('../models/User');
 
 const isUserAuthenticated = async (req, res, next) => {
     try {
-   
-        const token = req.header('Authorization')?.replace('Bearer ', '');
-        
+       const token = req.cookies?.authToken;
+      
         if (!token) {
             return res.status(401).json({ 
                 success: false, 
@@ -13,10 +12,8 @@ const isUserAuthenticated = async (req, res, next) => {
             });
         }
 
- 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
-
         const user = await User.findById(decoded.id).select('-password');
         
         if (!user) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CollaborationCard from './CollaborationCard';
-import collaborationService from '../../services/collaborationService';
+import collaborationService from '../services/collaborationService';
+import '../styles/CollaborationList.css';
 
 const CollaborationList = () => {
   const [collaborations, setCollaborations] = useState([]);
@@ -23,17 +24,31 @@ const CollaborationList = () => {
     }
   };
 
+  const handleDelete = (id) => {
+    setCollaborations(prev => prev.filter(collab => collab._id !== id));
+  };
+
   if (loading) return <div className="loading">Loading collaborations...</div>;
   if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className="collaboration-list">
-      <h2>Our Collaborations</h2>
-      <div className="collaborations-grid">
-        {collaborations.map(collab => (
-          <CollaborationCard key={collab._id} collaboration={collab} />
-        ))}
-      </div>
+    <div className="collaboration-list-container">
+      <h2 className="collaboration-list-title">Our Collaborations</h2>
+      {collaborations.length === 0 ? (
+        <div className="empty-state">
+          <p>No collaborations available at the moment.</p>
+        </div>
+      ) : (
+        <div className="collaborations-grid">
+          {collaborations.map(collab => (
+            <CollaborationCard 
+              key={collab._id} 
+              collaboration={collab} 
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

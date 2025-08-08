@@ -1,0 +1,67 @@
+/* Service Card Styles */
+.service-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s;
+  position: relative;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.service-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.service-icon-container {
+  text-align: center;
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  color: #3498db;
+}
+
+.service-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.service-description {
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.delete-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .service-card {
+    padding: 1rem;
+  }
+  
+  .service-title {
+    font-size: 1.1rem;
+  }
+}

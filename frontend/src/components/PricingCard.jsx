@@ -1,26 +1,29 @@
 import React from 'react';
+import '../styles/PricingCard.css';
 
-const PricingCard = ({ pricing }) => {
+const PricingCard = ({ pricing, isAdmin, onDelete }) => {
   return (
     <div className="pricing-card">
-      <div className="pricing-header">
-        <h3>{pricing.title}</h3>
-        <p className="pricing-description">{pricing.description}</p>
+      {isAdmin && (
+        <button 
+          className="pricing-card-delete" 
+          onClick={onDelete}
+          title="Delete pricing plan"
+        >
+          ×
+        </button>
+      )}
+      
+      <div className="pricing-card-header">
+        <h3 className="pricing-card-title">{pricing.planName}</h3>
+        <div className="pricing-card-price">${pricing.price}</div>
       </div>
-      <div className="pricing-content">
-        <div className="pricing-price">
-          <span className="price">${pricing.price}</span>
-          <span className="period">/{pricing.period}</span>
-        </div>
-        <ul className="pricing-features">
-          {pricing.features.map((feature, index) => (
-            <li key={index}>{feature}</li>
-          ))}
-        </ul>
-        <div className="pricing-cta">
-          <button className="btn-primary">Choose Plan</button>
-        </div>
-      </div>
+      
+      <ul className="pricing-card-features">
+        {pricing.features.map((feature, index) => (
+          <li key={index}>{feature}</li>
+        ))}
+      </ul>
     </div>
   );
 };

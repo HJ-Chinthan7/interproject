@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import collaborationService from '../../services/collaborationService';
+import collaborationService from '../services/collaborationService';
 
 const AddCollaborationForm = ({ onCollaborationAdded }) => {
   const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ const AddCollaborationForm = ({ onCollaborationAdded }) => {
     setError('');
 
     try {
-      await collaborationService.createCollaboration(formData);
+      await collaborationService.addCollaboration(formData);
       onCollaborationAdded();
       setFormData({
         title: '',

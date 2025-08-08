@@ -22,9 +22,9 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };                                            
 
-  // Navigation items for logged-in users
+
   const loggedInNavItems = [
-    { path: '/', label: 'Home' },
+    { path: '/home', label: 'Home' },
     { path: '/blogs', label: 'Blogs' },
     { path: '/pricing', label: 'Pricing' },
     { path: '/collaborations', label: 'Collaborations' },
@@ -35,7 +35,7 @@ const Navbar = () => {
     { path: '/services', label: 'Services' },
   ];
 
-  // Navigation items for non-logged-in users
+  
   const publicNavItems = [
     { path: '/', label: 'Home' },
     { path: '/login', label: 'SignIn' },
@@ -51,7 +51,6 @@ const Navbar = () => {
           YourBrand
         </Link>
         
-        {/* Hamburger menu for mobile */}
         <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
           <span className="bar"></span>
           <span className="bar"></span>

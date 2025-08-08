@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import BlogList from '../components/BlogList';
 import '../styles/Blog.css';
 
@@ -8,6 +9,7 @@ const Blogs = () => {
       <div className="blogs-header">
         <h1>Our Latest Blog Posts</h1>
         <p>Stay updated with the latest insights, tips, and stories from our team</p>
+        <Link to="/createBlog" className="create-blog-btn">Create New Blog</Link>
       </div>
       <BlogList />
     </div>
