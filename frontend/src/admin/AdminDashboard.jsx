@@ -11,7 +11,7 @@ import ContactList from '../components/ContactList';
 import BlogList from '../components/BlogList';
 import ServiceList from '../components/ServiceList';
 import ColloborationList from '../components/ColloborationList';
-import TestimonialList from '../components/testimonialList';
+import TestimonialList from '../components/TestimonialList';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
