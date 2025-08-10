@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 
 
 const corsOptions = {
-    origin: ['https://bespoke-shortbread-0f5da7.netlify.app'],
+    origin: ['https://interproject-teal.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
