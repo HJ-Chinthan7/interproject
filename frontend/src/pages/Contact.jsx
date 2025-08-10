@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import ContactList from '../components/ContactList';
+import './Contact.css';
 
 const Contact = () => {
   return (
-    <div>Contact</div>
-  )
-}
+    <div className="contact-page">
+      <h1>Contact Messages</h1>
+      <ContactList />
+    </div>
+  );
+};
 
-export default Contact
+export default Contact;

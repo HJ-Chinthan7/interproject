@@ -114,7 +114,7 @@ const BlogCard = ({ blog, onDelete }) => {
               </button>
               <button 
                 className="btn-delete" 
-                onClick={() => handleDelete(blog._id)}
+                onClick={handleDelete}
                 disabled={isDeleting}
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}

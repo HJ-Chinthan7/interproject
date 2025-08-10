@@ -68,7 +68,7 @@ const Navbar = () => {
           
           {user && userRole === 'admin' && (
             <li className="nav-item">
-              <Link to="/admin" className="nav-link admin-link" onClick={closeMenu}>
+              <Link to="/adminDashboard" className="nav-link admin-link" onClick={closeMenu}>
                 Admin Dashboard
               </Link>
             </li>

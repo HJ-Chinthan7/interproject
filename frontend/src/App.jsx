@@ -19,6 +19,7 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import Display from './components/Display';
 import AddBlogForm from './components/AddBlogForm';
+import Outreach from './pages/Outreach';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -89,6 +90,14 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+               <Route 
+              path="/outreach" 
+              element={
+                <ProtectedRoute>
+                  <Outreach />
+                </ProtectedRoute>
+              } 
+            />
             <Route 
               path="/about" 
               element={
@@ -148,9 +157,9 @@ function App() {
             <Route 
               path="/createBlog" 
               element={
-                <AdminRoute>
+                <PublicRoute>
                   <AddBlogForm />
-                </AdminRoute>
+                </PublicRoute>
               } 
             />
               <Route 

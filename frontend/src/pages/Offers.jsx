@@ -3,7 +3,6 @@ import OfferCard from '../components/OfferCard';
 import { useAuth } from '../context/AuthContext';
 import  offerService  from '../services/offerService';
 import '../styles/offer.css';
-import '../styles/offerlist.css';
 
 const Offers = () => {
   const [offers, setOffers] = useState([]);

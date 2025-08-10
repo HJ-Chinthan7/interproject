@@ -1,6 +1,5 @@
 import React from 'react';
 import CollaborationList from '../components/ColloborationList';
-import AddCollaborationForm from '../components/AddCollaborationForm';
 import '../styles/Collaborations.css';
 
 const Collaborations = () => {

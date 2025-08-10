@@ -150,7 +150,6 @@
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Medium screens - adjust spacing */
 @media screen and (max-width: 1024px) {
   .nav-container {
     padding: 0.75rem 1rem;
@@ -171,7 +170,6 @@
   }
 }
 
-/* Tablet screens */
 @media screen and (max-width: 768px) {
   .nav-container {
     padding: 0.75rem 1rem;
@@ -221,7 +219,6 @@
   }
 }
 
-/* Mobile screens */
 @media screen and (max-width: 480px) {
   .nav-container {
     padding: 0.5rem 1rem;
@@ -246,7 +243,6 @@
   }
 }
 
-/* Extra small screens */
 @media screen and (max-width: 320px) {
   .nav-container {
     padding: 0.5rem;
@@ -272,14 +268,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Admin session specific fixes */
+
 @media screen and (min-width: 769px) {
   .nav-menu {
     flex: 1;
     margin-left: 2rem;
   }
   
-  /* Handle overflow for admin sessions */
   .nav-container {
     overflow-x: auto;
     scrollbar-width: thin;
@@ -300,12 +295,10 @@ body {
   }
 }
 
-/* Ensure proper spacing for admin elements */
 .nav-item:last-child {
   margin-right: 0;
 }
 
-/* Additional fixes for admin session overflow */
 @media screen and (min-width: 769px) and (max-width: 1200px) {
   .nav-container {
     padding: 0.75rem 0.5rem;

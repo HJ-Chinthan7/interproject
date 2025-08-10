@@ -1,4 +1,4 @@
-/* Reset and base styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -21,7 +21,7 @@ body {
   flex-direction: column;
 }
 
-/* Navigation */
+
 .landing-nav {
   display: flex;
   justify-content: space-between;
@@ -72,12 +72,12 @@ body {
   color: white;
 }
 
-/* Main Content */
+
 .landing-main {
   flex: 1;
 }
 
-/* Hero Section */
+
 .hero-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -161,8 +161,7 @@ body {
   padding: 1rem 2.5rem;
   font-size: 1.25rem;
 }
-
-/* Hero Image */
+  
 .hero-image {
   display: flex;
   justify-content: center;
@@ -182,7 +181,7 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Features Section */
+
 .features-section {
   padding: 6rem 2rem;
   background-color: #f8fafc;
@@ -235,7 +234,6 @@ body {
   line-height: 1.6;
 }
 
-/* CTA Section */
 .cta-section {
   text-align: center;
   padding: 6rem 2rem;
@@ -255,7 +253,6 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Footer */
 .landing-footer {
   text-align: center;
   padding: 2rem;
@@ -263,7 +260,6 @@ body {
   color: #64748b;
 }
 
-/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -286,7 +282,6 @@ body {
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .landing-nav {
     padding: 1rem;

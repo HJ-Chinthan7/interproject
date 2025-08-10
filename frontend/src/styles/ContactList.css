@@ -1,0 +1,24 @@
+.contact-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.loading,
+.error,
+.no-contacts {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .contact-list {
+    padding: 1rem 0.5rem;
+  }
+}

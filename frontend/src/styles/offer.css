@@ -1,4 +1,4 @@
-/* Main offers page styles */
+
 .offers-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -46,7 +46,6 @@
   font-size: 1.2rem;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   .offers-container {
     padding: 1rem;

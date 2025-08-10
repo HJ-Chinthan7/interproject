@@ -1,4 +1,4 @@
-/* Footer Styles */
+
 .footer {
   background: linear-gradient(135deg, #1e293b, #334155);
   color: #e2e8f0;
@@ -93,7 +93,6 @@
   margin: 0;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .footer {
     padding: 2rem 0 1rem;
@@ -132,7 +131,6 @@
   }
 }
 
-/* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .footer {
     background: linear-gradient(135deg, #0f172a, #1e293b);

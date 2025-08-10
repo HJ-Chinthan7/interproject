@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import TestimonialCard from './TestimonialCard';
 import testimonialService from '../services/testimonialService';
-import { useAuth } from '../context/AuthContext';
 import '../styles/TestimonialList.css';
 
 const TestimonialList = () => {
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { user } = useAuth();
-  const isAdmin = user?.role === 'admin';
-
   useEffect(() => {
     fetchTestimonials();
   }, []);
