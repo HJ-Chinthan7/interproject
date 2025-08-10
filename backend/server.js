@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 
 
 const corsOptions = {
-    origin: ['http://localhost:5173'],
+    origin: ['https://sage-entremet-911e0c.netlify.app/'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
