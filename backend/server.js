@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 
 
 const corsOptions = {
-    origin: ['https://thunderous-druid-d37a0c.netlify.app'],
+    origin: ['https://bespoke-shortbread-0f5da7.netlify.app'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
