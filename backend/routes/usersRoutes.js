@@ -3,7 +3,7 @@ const router = express.Router();
 const {createBlog} =require('../controllers/adminController');
 const isUserAuthenticated = require('../middleware/isUserAuthenticated');
 const{getAllBlogs,getAllOutreach,getAllCollaborations,getAllOffers,getAllPricingPlans,getAllServices,getAllTestimonials,submitContactForm,deleteBlog,getBlogById} =require('../controllers/userController');
-console.log("user getall blog")
+
 router.post('/getAllBlogs', isUserAuthenticated, getAllBlogs);
 router.post('/getBlogById/:id', isUserAuthenticated, getBlogById)
 router.post('/getAllCollaborations', isUserAuthenticated, getAllCollaborations);
