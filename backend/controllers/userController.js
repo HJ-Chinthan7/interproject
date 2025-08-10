@@ -5,9 +5,8 @@ const Collaboration = require('../models/Collaboration');
 const Offer = require('../models/Offer');
 const Pricing = require('../models/Pricing');
 const Contact = require('../models/ContactForm');
-
+const Outreach=require('../models/Outreach')
 const deleteBlog = async (req, res) => {
-    console.log("deleteBlog function called");
     try {
     
 
@@ -100,6 +99,27 @@ const getAllTestimonials = async (req, res) => {
     }
 };
 
+const getAllOutreach = async (req, res) => {
+    try {
+        const outreach = await Outreach.find({})
+            .sort({ createdAt: -1 })
+            .select('-__v');
+        
+        res.status(200).json({
+            success: true,
+            count: outreach.length,
+            data: outreach
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error fetching outreach',
+            error: error.message
+        });
+    }
+};
+
+
 
 const getAllServices = async (req, res) => {
     try {
@@ -187,10 +207,9 @@ const getAllPricingPlans = async (req, res) => {
 };
 
 const submitContactForm = async (req, res) => {
+   
     try {
         const { name, email, message } = req.body;
-
-      
         if (!name || !email || !message) {
             return res.status(400).json({
                 success: false,
@@ -246,5 +265,6 @@ module.exports = {
     getAllPricingPlans,
     submitContactForm,
     deleteBlog,
-    getBlogById
+    getBlogById,
+ getAllOutreach 
 };

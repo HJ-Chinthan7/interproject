@@ -8,7 +8,6 @@ const Display = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     const fetchBlog = async () => {

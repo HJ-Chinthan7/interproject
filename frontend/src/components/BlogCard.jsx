@@ -31,7 +31,7 @@ const BlogCard = ({ blog, onDelete }) => {
 
   const canDelete = () => {
     if (!user) return false;
-    const isAuthor = blog.author?.name === user.firstName;
+    const isAuthor = blog.author?.firstName === user.firstName;
     const isAdmin = user.role === 'admin';
     return isAuthor || isAdmin;
   };
@@ -70,7 +70,7 @@ const BlogCard = ({ blog, onDelete }) => {
       <div className="blog-content">
         <div className="blog-meta">
           <span className="blog-date">{formatDate(blog.createdAt)}</span>
-          <span className="blog-author">By {blog.author?.firstName || 'Admin'}</span>
+          <span className="blog-author">By {blog.author?.firstName || 'Unknown'}</span>
           {blog.status && getStatusBadge(blog.status)}
         </div>
         

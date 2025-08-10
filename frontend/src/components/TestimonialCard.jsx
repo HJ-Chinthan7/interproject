@@ -8,7 +8,7 @@ const TestimonialCard = ({ testimonial, onDelete }) => {
   const isAdmin = user?.role === 'admin';
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this testimonial?')) {
+   
       try {
         await testimonialService.deleteTestimonial(testimonial._id);
         onDelete(testimonial._id);
@@ -16,7 +16,7 @@ const TestimonialCard = ({ testimonial, onDelete }) => {
         console.error('Error deleting testimonial:', error);
         alert('Failed to delete testimonial');
       }
-    }
+    
   };
 
   return (

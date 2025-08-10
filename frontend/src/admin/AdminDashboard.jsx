@@ -120,7 +120,7 @@ const AdminDashboard = () => {
               </div>
               <div className="list-section">
                 <h3>Existing Testimonials</h3>
-                <testimonialList />
+                <TestimonialList />
               </div>
             </div>
           </div>

@@ -7,7 +7,6 @@ const CollaborationCard = ({ collaboration, onDelete }) => {
   const { isAdmin } = useAuth();
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this collaboration?')) {
       try {
         await collaborationService.deleteCollaboration(collaboration._id);
         onDelete(collaboration._id);
@@ -15,7 +14,7 @@ const CollaborationCard = ({ collaboration, onDelete }) => {
         console.error('Error deleting collaboration:', error);
         alert('Failed to delete collaboration');
       }
-    }
+    
   };
 
   return (

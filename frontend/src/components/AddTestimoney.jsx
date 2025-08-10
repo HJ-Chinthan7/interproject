@@ -20,15 +20,7 @@ const AddTestimoney = ({ onSuccess }) => {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData(prev => ({
-        ...prev,
-        image: file
-      }));
-    }
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,15 +28,8 @@ const AddTestimoney = ({ onSuccess }) => {
     setError('');
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('author', formData.name);
-      formDataToSend.append('content', formData.message);
-      formDataToSend.append('role', formData.designation);
-      if (formData.image) {
-        formDataToSend.append('image', formData.image);
-      }
-
-      await testimonialService.addTestimonial(formDataToSend);
+     
+      await testimonialService.addTestimonial(formData);
       
      
       setFormData({
@@ -110,25 +95,6 @@ const AddTestimoney = ({ onSuccess }) => {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="image">Image</label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-          {formData.image && (
-            <div className="image-preview">
-              <img 
-                src={URL.createObjectURL(formData.image)} 
-                alt="Preview" 
-                style={{ maxWidth: '100px', maxHeight: '100px' }}
-              />
-            </div>
-          )}
-        </div>
 
         <button type="submit" disabled={loading} className="submit-btn">
           {loading ? 'Adding...' : 'Add Testimonial'}

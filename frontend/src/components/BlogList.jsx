@@ -14,10 +14,8 @@ const BlogList = () => {
 
   const fetchBlogs = useCallback(async () => {
     try {
-      console.log("Fetching blogs...");
       const response = await blogService.getAllBlogs();
       setBlogs(response.data);
-      console.log(response.data);
     } catch (error) {
       setError('Failed to load blogs');
       console.error('Error fetching blogs:', error);
@@ -30,7 +28,6 @@ const BlogList = () => {
     try {
       setBlogs(prevBlogs => prevBlogs.filter(blog => blog._id !== blogId));
       await blogService.deleteBlog(blogId);
-      console.log('Blog deleted successfully:', blogId);
     } catch (error) {
       console.error('Error deleting blog:', error);
       alert('Failed to delete blog. Please try again.');
@@ -63,7 +60,6 @@ const BlogList = () => {
         </div>
       ) : (
         <div className="blogs-grid">
-          {console.log("here")}
           {blogs.map(blog => ( 
             <BlogCard 
               key={blog._id} 

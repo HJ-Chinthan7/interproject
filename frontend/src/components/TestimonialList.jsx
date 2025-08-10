@@ -13,7 +13,7 @@ const TestimonialList = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const response = await testimonialService.getTestimonials();
+      const response = await testimonialService.getAllTestimonials();
       setTestimonials(response.data || response);
     } catch (error) {
       setError('Failed to load testimonials');

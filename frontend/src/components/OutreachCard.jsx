@@ -7,7 +7,6 @@ const OutreachCard = ({ outreach, onDelete }) => {
   const { isAdmin } = useAuth();
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this outreach program?')) {
       try {
         await outreachService.deleteOutreach(outreach._id);
         onDelete(outreach._id);
@@ -15,7 +14,7 @@ const OutreachCard = ({ outreach, onDelete }) => {
         console.error('Error deleting outreach:', error);
         alert('Failed to delete outreach program');
       }
-    }
+    
   };
 
   const formatDate = (dateString) => {

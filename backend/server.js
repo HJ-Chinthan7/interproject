@@ -23,14 +23,13 @@ const userRoutes= require('./routes/usersRoutes');
 const adminRoutes= require('./routes/adminRoutes');
 
 app.use('/api/auth',authRoutes);
-console.log("role");
 app.use('/api/users',userRoutes);  
 app.use('/api/admin',adminRoutes);
 
 connectDB().then(()=>{
     console.log('Connected to MongoDB');
     
-app.listen(5000,()=>{
+app.listen(process.env.PORT||5000,()=>{
     console.log('Server is running on port 5000');
 });
 }).catch((err)=>{

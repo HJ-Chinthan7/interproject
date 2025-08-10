@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await authService.login(email, password);
       const { user } = response;
-      console.log("in auth context login", user);
       setUser(user);
       setIsAuthenticated(true);
       setUserRole(user.role);
@@ -37,7 +36,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (userData) => {
-    console.log("in auth context register", userData);
     try {
       const response = await authService.register(userData);
       const { user } = response;

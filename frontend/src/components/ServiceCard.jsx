@@ -8,7 +8,6 @@ const ServiceCard = ({ service, onDelete }) => {
   const isAdmin = user?.role === 'admin';
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this service?')) {
       try {
         await serviceService.deleteService(service._id);
         onDelete(service._id);
@@ -16,7 +15,7 @@ const ServiceCard = ({ service, onDelete }) => {
         console.error('Error deleting service:', error);
         alert('Failed to delete service');
       }
-    }
+    
   };
 
   return (

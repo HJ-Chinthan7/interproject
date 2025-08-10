@@ -57,8 +57,8 @@ const AboutUs = () => {
             to connect, feel free to reach out to us.
           </p>
           <div className="contact-info">
-            <p>Email: contact@example.com</p>
-            <p>Phone: +1 (555) 123-4567</p>
+            <p>Email: info@mayana.com</p>
+            <p>Phone: +91 1234567890</p>
           </div>
         </section>
       </div>

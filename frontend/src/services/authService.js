@@ -4,7 +4,6 @@ const authService = {
   async login(email, password) {
     try {
       const response = await api.post('/auth/login', { email, password });
-      console.log("Login response:", response.data);
       return response.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Login failed');

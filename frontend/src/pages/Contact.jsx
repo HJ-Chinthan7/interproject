@@ -1,12 +1,11 @@
-import React from 'react';
-import ContactList from '../components/ContactList';
-import './Contact.css';
 
+import '../styles/Contact.css';
+import ContactForm from '../components/ContactForm';
 const Contact = () => {
   return (
     <div className="contact-page">
       <h1>Contact Messages</h1>
-      <ContactList />
+      <ContactForm />
     </div>
   );
 };

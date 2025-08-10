@@ -18,9 +18,8 @@ const Home = () => {
           offerService.getAllOffers(),
           outreachService.getAllOutreach()
         ]);
-
-        setOffers(offersData?.offers?.slice(0, 2) || []);
-        setOutreach(outreachData?.outreach?.slice(0, 3) || []);
+        setOffers(offersData?.data?.slice(0, 2) || []);
+        setOutreach(outreachData?.data?.slice(0, 3) || []);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {

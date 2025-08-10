@@ -13,7 +13,7 @@ const testimonialService = {
   },
 
   addTestimonial: async (data) => {
-    const response = await api.post('/users/addTestimonial', data);
+    const response = await api.post('/admin/addtestimonial', data);
     return response.data;
   },
 };

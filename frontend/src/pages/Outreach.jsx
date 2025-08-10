@@ -15,7 +15,7 @@ const Outreach = () => {
   const fetchOutreach = async () => {
     try {
       const response = await outreachService.getAllOutreach();
-      setOutreach(response);
+      setOutreach(response.data);
     } catch (error) {
       setError('Failed to load outreach programs');
       console.error('Error fetching outreach:', error);

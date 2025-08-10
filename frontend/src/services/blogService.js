@@ -3,7 +3,6 @@ import api from './api';
 const blogService = {
   getAllBlogs: async () => {
     const response = await api.post('/users/getAllBlogs');
-    console.log(response)
     return response.data;
   },
   

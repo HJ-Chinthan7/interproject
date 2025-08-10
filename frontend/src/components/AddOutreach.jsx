@@ -9,7 +9,7 @@ const AddOutreach = () => {
     date: '',
     location: '',
     partners: '',
-    contact_email: ''
+    contact: ''
   });
 
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const AddOutreach = () => {
         date: '',
         location: '',
         partners: '',
-        contact_email: ''
+       contact: ''
       });
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to create outreach');
@@ -130,7 +130,7 @@ const AddOutreach = () => {
           <input
             type="email"
             id="contact_email"
-            name="contact_email"
+            name="contact"
             value={formData.contact_email}
             onChange={handleChange}
             required

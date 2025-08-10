@@ -9,7 +9,7 @@ const LandingPage = () => {
         <section className="hero-section">
           <div className="hero-content">
             <h1 className="hero-title">
-              Welcome to <span className="highlight">Your Platform</span>
+              Welcome to <span className="highlight">Mayana</span>
             </h1>
             <p className="hero-subtitle">
               Join thousands of users who are already experiencing the future of 
@@ -26,7 +26,7 @@ const LandingPage = () => {
           </div>
           <div className="hero-image">
             <div className="placeholder-image">
-              <span>🚀</span>
+              <span>🫂</span>
             </div>
           </div>
         </section>

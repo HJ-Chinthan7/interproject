@@ -7,9 +7,8 @@ const outreachService = {
     return response.data;
   },
 
-
   createOutreach: async (data) => {
-    const response = await api.post('/admin/addOutreach', data);
+    const response = await api.post('/admin/createOutreach', data);
     return response.data;
   },
 

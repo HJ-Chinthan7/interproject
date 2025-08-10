@@ -28,16 +28,14 @@ const Offers = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this offer?')) {
       try {
-        console.log("here in the frontend",id);
         await offerService.deleteOffer(id);
         setOffers(offers.filter(offer => offer._id !== id));
       } catch (err) {
         setError('Failed to delete offer');
         console.error('Error deleting offer:', err);
       }
-    }
+    
   };
 
   if (loading) return <div className="loading">Loading offers...</div>;

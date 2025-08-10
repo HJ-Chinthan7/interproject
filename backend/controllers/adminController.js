@@ -7,6 +7,8 @@ const Pricing = require('../models/Pricing');
 const ContactForm = require('../models/ContactForm');
 
 
+const Outreach = require('../models/Outreach');
+
 const createBlog = async (req, res) => {
     try {
         const { title, content, tags, status,author } = req.body;
@@ -43,20 +45,61 @@ const createBlog = async (req, res) => {
 };
 
 
+const createOutreach = async (req, res) => {
+
+    try {
+        const { title, description, date, location, partners, contact } = req.body;
+
+
+        if (!title || !description || !date || !location || !partners || !contact) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide all required fields: title, description, date, location, partners, contact'
+            });
+        }
+
+      const newOutreach = new Outreach({
+    title: title.trim(),
+    description: description.trim(),
+    date: new Date(date),
+    location: location.trim(),
+    partners: Array.isArray(partners) ? partners.map(p => p.trim()) : [partners.trim()],
+    contact: contact.trim()
+});
+
+        const savedOutreach = await newOutreach.save();
+
+        res.status(201).json({
+            success: true,
+            message: 'Outreach created successfully',
+            data: savedOutreach
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error creating outreach',
+            error: error.message
+        });
+    }
+};
+
 
 
 
 const createTestimonial = async (req, res) => {
     try {
         const { name, message, designation, image } = req.body;
-
+console.log(name)
+console.log(designation)
+console.log(message)
+console.log(image);
         if (!name || !message || !designation) {
             return res.status(400).json({
                 success: false,
                 message: 'Name, message, and designation are required'
             });
         }
-
+console.log("here");
         const newTestimonial = new Testimonial({
             name,
             message,
@@ -105,7 +148,31 @@ const deleteTestimonial = async (req, res) => {
         });
     }
 };
+const deleteOutreach = async (req, res) => {
+    try {
+        const { id } = req.params;
 
+        const outreach = await Outreach.findByIdAndDelete(id);
+
+        if (!outreach) {
+            return res.status(404).json({
+                success: false,
+                message: 'Outreach not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Outreach deleted successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting outreach',
+            error: error.message
+        });
+    }
+};
 const createService = async (req, res) => {
     try {
         const { title, description, icon } = req.body;
@@ -201,7 +268,6 @@ const createOffer = async (req, res) => {
 const deleteOffer = async (req, res) => {
     try {
         const { id } = req.params;
-console.log("in  delete offer")
         const offer = await Offer.findByIdAndDelete(id);
 
         if (!offer) {
@@ -323,7 +389,6 @@ const createPricing = async (req, res) => {
 const deletePricing = async (req, res) => {
     try {
         const { id } = req.params;
-console.log(id);
         const pricing = await Pricing.findByIdAndDelete(id);
 
         if (!pricing) {
@@ -383,6 +448,7 @@ module.exports = {
     
     createPricing,
     deletePricing,
-    
+ createOutreach,
+    deleteOutreach,
     getAllContactForms
 };

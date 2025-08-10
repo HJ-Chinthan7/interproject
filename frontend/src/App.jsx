@@ -15,7 +15,6 @@ import Collaborations from './pages/Collaborations';
 import Offers from './pages/Offers';
 import Pricing from './pages/Pricing';
 import AdminDashboard from './admin/AdminDashboard';
-import './App.css';
 import LandingPage from './pages/LandingPage';
 import Display from './components/Display';
 import AddBlogForm from './components/AddBlogForm';
@@ -35,7 +34,7 @@ const AdminRoute = ({ children }) => {
 
 const PublicRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
-  return isAuthenticated ?  <Navigate to="/home" /> : children;
+  return isAuthenticated ? <Navigate to="/home" />:  children ;
 
 };
 
@@ -157,9 +156,9 @@ function App() {
             <Route 
               path="/createBlog" 
               element={
-                <PublicRoute>
+                <ProtectedRoute>
                   <AddBlogForm />
-                </PublicRoute>
+                </ProtectedRoute>
               } 
             />
               <Route 

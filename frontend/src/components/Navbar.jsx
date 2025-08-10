@@ -29,7 +29,8 @@ const Navbar = () => {
     { path: '/pricing', label: 'Pricing' },
     { path: '/collaborations', label: 'Collaborations' },
     { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/contact', label: 'Contact' }, 
+    { path: '/testimonials', label: 'Testimonial' },
     { path: '/offers', label: 'Offers' },
     { path: '/outreach', label: 'Outreach' },
     { path: '/services', label: 'Services' },
@@ -48,7 +49,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo" onClick={closeMenu}>
-          YourBrand
+          Mayana
         </Link>
         
         <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>

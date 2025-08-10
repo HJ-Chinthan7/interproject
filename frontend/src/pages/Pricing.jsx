@@ -25,14 +25,13 @@ const Pricing = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this pricing plan?')) {
       try {
         await deletePricing(id);
         setPricing(pricing.filter(item => item._id !== id));
       } catch (error) {
         console.error('Error deleting pricing:', error);
       }
-    }
+    
   };
 
   if (loading) {

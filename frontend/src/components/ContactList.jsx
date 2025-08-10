@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ContactCard from './ContactCard';
-import { contactService } from '../services/contactService';
+import  contactService  from '../services/contactService';
 import '../styles/ContactList.css';
 
 const ContactList = () => {
@@ -16,7 +16,7 @@ const ContactList = () => {
     try {
       setLoading(true);
       const data = await contactService.getAllContacts();
-      setContacts(data);
+      setContacts(data.data);
     } catch (err) {
       setError('Failed to load contacts');
       console.error('Error loading contacts:', err);

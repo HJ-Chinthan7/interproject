@@ -13,7 +13,7 @@ const collaborationService = {
   },
 
    addCollaboration: async (data) => {
-    const response = await api.post('/users/addCollaboration', data);
+    const response = await api.post('/admin/addCollaboration', data);
     return response.data;
   },
 };

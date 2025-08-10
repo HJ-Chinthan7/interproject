@@ -33,14 +33,14 @@ const Footer = () => {
           
           <div className="footer-section">
             <h3>Contact Info</h3>
-            <p>Email: info@yourbrand.com</p>
-            <p>Phone: +1 (555) 123-4567</p>
-            <p>Address: 123 Business St, City, State</p>
+            <p>Email: info@mayana.com</p>
+            <p>Phone: +91 1234567890</p>
+            <p>Address: Bangalore</p>
           </div>
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2024 YourBrand. All rights reserved.</p>
+          <p>&copy; 2025 Mayana. All rights reserved.</p>
         </div>
       </div>
     </footer>
