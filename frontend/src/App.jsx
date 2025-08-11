@@ -22,7 +22,7 @@ import Outreach from './pages/Outreach';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated ,loading} = useAuth();
-   if (loading) return null; // or a loading spinner
+   if (loading) return null;
 
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
