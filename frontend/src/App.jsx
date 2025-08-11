@@ -21,11 +21,15 @@ import AddBlogForm from './components/AddBlogForm';
 import Outreach from './pages/Outreach';
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated ,loading} = useAuth();
+   if (loading) return null; // or a loading spinner
+
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
 const AdminRoute = ({ children }) => {
-  const { isAuthenticated ,userRole} = useAuth();
+  const { isAuthenticated ,userRole,loading} = useAuth();
+   
+  if (loading) return null; 
   if(isAuthenticated){
      return userRole==='admin' ? children : <Navigate to="/login" />;
   }
@@ -33,7 +37,9 @@ const AdminRoute = ({ children }) => {
 };
 
 const PublicRoute = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated,loading } = useAuth();
+  
+  if (loading) return null; 
   return isAuthenticated ? <Navigate to="/home" />:  children ;
 
 };

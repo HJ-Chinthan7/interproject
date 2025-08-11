@@ -18,6 +18,12 @@ export const AuthProvider = ({ children }) => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setUser(storedUser);
+      setIsAuthenticated(true);
+      setUserRole(storedUser.role);
+    }
     setLoading(false);
   }, []);
 
@@ -25,10 +31,15 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await authService.login(email, password);
       const { user } = response;
+
+   
       setUser(user);
       setIsAuthenticated(true);
       setUserRole(user.role);
-      
+
+    
+      localStorage.setItem('user', JSON.stringify(user));
+
       return { success: true };
     } catch (error) {
       return { success: false, error: error.message };
@@ -39,18 +50,25 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await authService.register(userData);
       const { user } = response;
+
       
       setUser(user);
       setIsAuthenticated(true);
       setUserRole(user.role);
+
+  
+      localStorage.setItem('user', JSON.stringify(user));
+
       return { success: true };
     } catch (error) {
       return { success: false, error: error.message };
     }
   };
 
+
   const logout = () => {
     authService.logout();
+    localStorage.removeItem('user'); 
     setUser(null);
     setIsAuthenticated(false);
     setUserRole(null);
