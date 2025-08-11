@@ -17,6 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+console.log("i am going to auth");
 const authRoutes= require('./routes/authRoutes')
 const userRoutes= require('./routes/usersRoutes');
 const adminRoutes= require('./routes/adminRoutes');

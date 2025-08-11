@@ -1,6 +1,6 @@
 const validateSignIn = (req, res, next) => {
  try{
-   
+   console.log("In the valiodation")
   const { email, password } = req.body;
 
   if (!email || !password) {

@@ -37,6 +37,7 @@ res.status(201).json({
 
 const signin=async(req,res)=>{
   try{
+    console.log("in the login");
     const {email, password} = req.body;
     const user = await User.findOne({ email });
     if (!user) {
