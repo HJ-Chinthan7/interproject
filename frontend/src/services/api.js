@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://interproject-9rsw.onrender.com/api', 
+  baseURL: 'https://interproject-nn9i.onrender.com/api', 
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
