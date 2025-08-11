@@ -8,7 +8,7 @@ const app=express();
 const cookieParser = require('cookie-parser');
 
 const corsOptions = {
-    origin: ['https://interproject-teal.vercel.app'],
+    origin: 'https://interproject-teal.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
